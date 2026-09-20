@@ -78,7 +78,7 @@ use once_cell::sync::OnceCell;
 use rle::HasLength;
 use serde::{Deserialize, Serialize};
 use serde_columnar::{columnar, AnyRleDecoder, DeltaOfDeltaDecoder, Itertools};
-use tracing::info;
+use tracing::trace;
 
 use super::block_meta_encode::decode_changes_header;
 use crate::arena::SharedArena;
@@ -119,15 +119,15 @@ struct EncodedBlock<'a> {
 }
 
 fn diagnose_block(block: &EncodedBlock) {
-    info!("Diagnosing EncodedBlock:");
-    info!("  header {} bytes", block.header.len());
-    info!("  change_meta {} bytes", block.change_meta.len());
-    info!("  cids: {} bytes", block.cids.len());
-    info!("  keys: {} bytes", block.keys.len());
-    info!("  positions: {} bytes", block.positions.len());
-    info!("  ops: {} bytes", block.ops.len());
-    info!("  delete_id_starts: {} bytes", block.delete_start_ids.len());
-    info!("  values: {} bytes", block.values.len());
+    trace!("Diagnosing EncodedBlock:");
+    trace!("  header {} bytes", block.header.len());
+    trace!("  change_meta {} bytes", block.change_meta.len());
+    trace!("  cids: {} bytes", block.cids.len());
+    trace!("  keys: {} bytes", block.keys.len());
+    trace!("  positions: {} bytes", block.positions.len());
+    trace!("  ops: {} bytes", block.ops.len());
+    trace!("  delete_id_starts: {} bytes", block.delete_start_ids.len());
+    trace!("  values: {} bytes", block.values.len());
 }
 
 const VERSION: u16 = 0;
